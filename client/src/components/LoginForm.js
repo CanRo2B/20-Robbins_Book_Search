@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { loginUser } from '../utils/API';
+// import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
+import { LOGIN_USER } from '../utils/mutations';
 
 // Replace the loginUser function from the API file with LOGIN_USER mutation function
 
@@ -28,7 +29,7 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await loginUser(userFormData);
+      const response = await LOGIN_USER({variables: {...userFormData}, });
 
       if (!response.ok) {
         throw new Error('something went wrong!');
