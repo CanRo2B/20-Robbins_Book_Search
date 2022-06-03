@@ -1,46 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
-
-import { getMe, deleteBook } from '../utils/API';
+import { GET_ME } from '../utils/queries'
+// import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
+import { REMOVE_BOOK } from '../utils/mutations';
 
-// Remove the useEffect() that sets the state for UserData
+
 
 // Use the useQuery() to execute the GET ME query on load and save it to a variable name userData
+const userData = () => {
+  const { loading, data } = useQuery(GET_ME);
+
 
 // Use the useMutation() to run the REMOVE_BOOK in the handleDeleteBook() instead of deleteBook() (Keep the removeBookId() )
 
-const SavedBooks = () => {
-  const [userData, setUserData] = useState({});
+// Remove the useEffect() that sets the state for UserData
 
-  // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
+// const SavedBooks = () => {
+//   const [userData, setUserData] = useState({});
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
+//   // use this to determine if `useEffect()` hook needs to run again
+//   const userDataLength = Object.keys(userData).length;
 
-        if (!token) {
-          return false;
-        }
+//   useEffect(() => {
+//     const getUserData = async () => {
+//       try {
+//         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        const response = await getMe(token);
+//         if (!token) {
+//           return false;
+//         }
 
-        if (!response.ok) {
-          throw new Error('something went wrong!');
-        }
+//         const response = await getMe(token);
 
-        const user = await response.json();
-        setUserData(user);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+//         if (!response.ok) {
+//           throw new Error('something went wrong!');
+//         }
 
-    getUserData();
-  }, [userDataLength]);
+//         const user = await response.json();
+//         setUserData(user);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+
+//     getUserData();
+//   }, [userDataLength]);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -51,7 +57,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      const response = await REMOVE_BOOK(bookId, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
