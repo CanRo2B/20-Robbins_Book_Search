@@ -5,6 +5,10 @@ import Auth from '../utils/auth';
 import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
+// Use Apollo useMutation() hook to run the SAVE_BOOK mutation in the handleSaveBook() function
+
+// Keep the books ID to state in try catch
+
 const SearchBooks = () => {
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);

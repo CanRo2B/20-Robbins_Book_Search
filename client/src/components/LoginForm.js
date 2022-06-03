@@ -5,6 +5,8 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
 
+// Replace the loginUser function from the API file with LOGIN_USER mutation function
+
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);

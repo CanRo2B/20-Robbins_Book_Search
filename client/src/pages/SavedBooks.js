@@ -5,6 +5,12 @@ import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
+// Remove the useEffect() that sets the state for UserData
+
+// Use the useQuery() to execute the GET ME query on load and save it to a variable name userData
+
+// Use the useMutation() to run the REMOVE_BOOK in the handleDeleteBook() instead of deleteBook() (Keep the removeBookId() )
+
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
 

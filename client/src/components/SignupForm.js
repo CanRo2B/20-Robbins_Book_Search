@@ -4,6 +4,8 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 
+// replace addUser() inported from API with the ADD_USER functionality in the mutation file
+
 const SignupForm = () => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
