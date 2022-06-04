@@ -14,6 +14,8 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
  
+server.applyMiddleware({ app });
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -27,10 +29,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client'));
 });
 
-const startApolloServer = async (typeDefs, resolvers) => {
-  await server.start();
-  server.applyMiddleware({ app });
-}
+
+
+
 
 db.once('open', () => {
   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));

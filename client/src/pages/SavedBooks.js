@@ -13,7 +13,6 @@ import { REMOVE_BOOK } from '../utils/mutations';
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
  
-
   const userData = data?.me || [];
 
 // Use the useMutation() to run the REMOVE_BOOK in the handleDeleteBook() instead of deleteBook() (Keep the removeBookId() )

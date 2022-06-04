@@ -1,13 +1,15 @@
 const { User, Book } = require('../models');
 const {AuthentificationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { ADD_USER } = require('../../client/src/utils/mutations');
 
 
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      return User.find({});
+        if (context.user) {
+            const userData =await User.findOne({_id: context.user._id}).selet(password)
+        }
+      return userData;
     },
     Book: async (parent, { _id }) => {
       const params = _id ? { _id } : {};
@@ -35,13 +37,13 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
     },
-    getSingleUser: async (parent, args) => {
-      const user = await User.create(args);
-      return user;
-    },
+    // getSingleUser: async (parent, args) => {
+    //   const user = await User.create(args);
+    //   return user;
+    // },
 
     saveBook: async (parent, { _id, title}) => {
-      const save = await Book.findOneAndUpdate(
+      const save = await User.findOneAndUpdate(
         { _id },
         { $inc: { [`Book ${title } saved`]: 1 } },
         { new: true }
